@@ -1,0 +1,41 @@
+<table class="table">
+	<tr class="loading"><td></tr>
+	<tr>
+	  <th>
+		<%= sortable "brewery" %>
+	  <th>
+		<%= sortable "brew", "beer" %>
+	  <th>
+		<%= sortable "style" %>
+	  <th>
+		<%= sortable "abv", "ABV" %>
+	  <th>
+	    <%= sortable "year" %>
+	<tr class="beer-row" style="display: none;" id="new-beer-row">
+	  <%= form_for Beer.new do |f| %>
+	    <%= render 'fields', :f => f %>
+	  <% end %>
+	
+	
+	<% @beers.each do |beer| %>
+	<tr>
+	  <td>
+		<%= beer.brewery %>
+	  <td>
+		<%= beer.brew %>
+	  <td>
+		<%= beer.style %>
+	  <td>
+		<%= beer.abv %>
+	  <td>
+		<%= beer.year %>
+	  <td>
+		<button id="<%= beer.id %>" data-toggle="collapse" data-target="#beer-form-<%= beer.id %>" class="beer-row">edit</button>
+	  </tr>
+
+    	<tr id="beer-row-<%= beer.id %>" class="beer-row" style="display: none;">
+		  <%= form_for beer do |f| %>
+		    <%= render 'fields', :f => f %>
+		  <% end %>
+	<% end %>
+</table>

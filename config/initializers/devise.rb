@@ -211,9 +211,16 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  if ENV["RAILS_ENV"] == "production"
   config.omniauth :facebook, ENV['FB_KEY'], ENV['FB_SECRET'], 
                   {:scope => 'email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
   config.omniauth :google_oauth2, ENV['GOO_KEY'], ENV['GOO_SECRET'], {}
+  end
+  # if ENV["RAILS_ENV"] == "development"
+    config.omniauth :facebook, ENV['FB_KEY'], ENV['FB_SECRET'], 
+                    {:scope => 'email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
+    config.omniauth :google_oauth2, "38898026004.apps.googleusercontent.com", "xtBdPPdP_S2fkw4vHffOb0Gn", {}
+  # end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

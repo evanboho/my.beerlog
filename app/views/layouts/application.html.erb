@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Beerlog</title>
+  <title><%= hero.first %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div class="hero-unit">
+	  <div style="float:right;">
+		<% if !current_user %>
+			<p><%= link_to "log in", new_user_session_path %></p>
+			<p>
+			<a href="/users/auth/google_oauth2" class="auth_provider">
+			through google
+			</a>
+		    <p><%= link_to "sign up", new_user_registration_path %></p>
+		<% else %>
+		  <p>logged in as <%= current_user.email.split('@').first %></p>
+		  <p><%= link_to "sign out", sign_out_path %>
+		<% end %>
+	</div>
+	<h1><%= hero.first %></h1>
+	<p> <%= hero.last %></p>
+	<div class="debug">
+	<p><%= controller_name %>#<%= action_name %></p>
+	<p><%= ENV["RAILS_ENV"] %>
+	<p><%= params %>
+	</div>
+		
+	</div>
 	
-<%= yield %>
+	<div class="container">
+
+  <%= yield %>
+    </div>
 
 </body>
 </html>

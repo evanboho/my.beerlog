@@ -35,4 +35,8 @@ Beerlog::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  # config.omniauth :facebook, ENV['FB_KEY'], ENV['FB_SECRET'], 
+  #                 {:scope => 'email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
+  # config.omniauth :google_oauth2, "38898026004.apps.googleusercontent.com", "xtBdPPdP_S2fkw4vHffOb0Gn", {}
 end

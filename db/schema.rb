@@ -11,7 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120430002528) do
+ActiveRecord::Schema.define(:version => 20120430051607) do
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "photo_url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+
+  create_table "beers", :force => true do |t|
+    t.string   "brewery"
+    t.string   "brew"
+    t.integer  "year"
+    t.string   "style"
+    t.string   "abv"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "ratings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "beer_id"
+    t.integer  "rate"
+    t.string   "tasted_on"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "ratings", ["user_id", "beer_id"], :name => "index_ratings_on_user_id_and_beer_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

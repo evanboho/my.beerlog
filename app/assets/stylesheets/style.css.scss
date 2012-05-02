@@ -1,3 +1,26 @@
-h1 {
- font-size: 1em;
+td {
+  vertical-align: top;
+}
+
+input {
+  width: auto;
+}
+
+.beer-row td {
+  width: 150px;
+}
+
+.beer-row input {
+  width: 100px;
+}
+input.abv_year {
+  width: 35px;
+}
+
+.debug {
+  display: none;
+}
+
+input.beer-submit {
+  width: 50px;
 }
