@@ -3,12 +3,7 @@ class BeersController < ApplicationController
   helper_method :sort_column, :sort_direction  
   
   def index
-    if params[:search].present?
-      @beers = Beer.search(params[:search])
-    else
-      @beers = Beer.scoped
-    end
-    @beers = @beers.reorder(sort_column + ' ' + sort_direction)
+    get_beers
   end
   
   def my_beers
@@ -40,16 +35,6 @@ class BeersController < ApplicationController
   
   def destroy
     
-  end
-  
-  private
-  
-  def sort_column
-    Beer.column_names.include?(params[:sort]) ? params[:sort] : "brewery"  
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
 end

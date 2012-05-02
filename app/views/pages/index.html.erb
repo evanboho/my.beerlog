@@ -1,1 +1,8 @@
+<div class="container" style="text-align:center;">
+<%= form_tag beers_path, :method => :get, :id => "beer_search" do %>
+    <td colspan=5 style="text-align: center;">
+	  <%= text_field_tag :search %> 
+	  <%= submit_tag "search", :class => "btn btn-primary" %>
+  <% end %>
+</div>
 <%= render 'beers/beer_table' %>

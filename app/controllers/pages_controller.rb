@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   
   def index
-    @beers = Beer.all
+    get_beers
   end
 end
