@@ -6,7 +6,7 @@ class CreateBeers < ActiveRecord::Migration
       t.integer :year
       t.string  :style
       t.string  :abv
-      #t.string  :ibu
+      t.string  :ibu
 
       t.timestamps
     end

@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20120430051607) do
     t.integer  "year"
     t.string   "style"
     t.string   "abv"
+    t.string   "ibu"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

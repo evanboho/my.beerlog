@@ -12,6 +12,8 @@
 	  <th>
 	    <%= sortable "year" %>
 	  <th>
+		<%= sortable "ibu" %>
+	  <th>
 		<div class="" style="text-align:left;">
 		  <button class="new-beer-row btn btn-primary">new beer</a>
 		</div>
@@ -33,6 +35,8 @@
 		<%= beer.abv %> %
 	  <td>
 		<%= beer.year %>
+	  <td>
+		<%= beer.ibu %>
 	  <td>
 		<button id="<%= beer.id %>" data-toggle="collapse" data-target="#beer-form-<%= beer.id %>" class="beer-row btn">edit</button>
 	  </tr>
