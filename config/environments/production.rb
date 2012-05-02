@@ -65,7 +65,7 @@ Beerlog::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
-  config.omniauth :facebook, ENV['FB_KEY'], ENV['FB_SECRET'], 
-                  {:scope => 'email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
-  config.omniauth :google_oauth2, ENV['GOO_KEY'], ENV['GOO_SECRET'], {}
+  # config.omniauth :facebook, ENV['FB_KEY'], ENV['FB_SECRET'], 
+  #                 {:scope => 'email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
+  # config.omniauth :google_oauth2, ENV['GOO_KEY'], ENV['GOO_SECRET'], {}
 end

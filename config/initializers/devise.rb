@@ -216,11 +216,11 @@ Devise.setup do |config|
                   {:scope => 'email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
   config.omniauth :google_oauth2, ENV['GOO_KEY'], ENV['GOO_SECRET'], {}
   end
-  # if ENV["RAILS_ENV"] == "development"
+  if ENV["RAILS_ENV"] == "development"
     config.omniauth :facebook, ENV['FB_KEY'], ENV['FB_SECRET'], 
                     {:scope => 'email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
     config.omniauth :google_oauth2, "38898026004.apps.googleusercontent.com", "xtBdPPdP_S2fkw4vHffOb0Gn", {}
-  # end
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
