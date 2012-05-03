@@ -15,12 +15,12 @@
 		<%= sortable "year" %>
 	  <th class="rating">
 		<%= sortable "average_rating", "avg rating" %>
-	  <% if current_user.present? %>
 	  <th class="rating">
+	  <% if current_user.present? %>
 		<%= params[:action] == "my_beers" ? (sortable "rate", "your rating") : (link_to "your rating", my_beers_path) %>
 	  <% end %>
-	  <% if params[:action] == "index" %>
 	  <th>
+      <% if params[:action] == "index" %>
 		<div class="" style="text-align:left;">
 		  <button class="new-beer-row btn btn-primary">new beer</a>
 		</div>
@@ -31,7 +31,6 @@
 	  <% else %>
 	  <%= link_to "all beers", beers_path, :class => "btn btn-primary" %>
 	  <% end %>
-	
 	
 	<% @beers.each do |beer| %>
 	<tr>
