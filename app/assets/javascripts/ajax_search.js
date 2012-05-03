@@ -1,5 +1,5 @@
 $(function() {
-	$('#beer_table th a').live("click", function() {
+	$('#beer_table th a, .cancel').live("click", function() {
 		$.getScript(this.href);
 		return false;
 	});

@@ -19,7 +19,7 @@ class Beer < ActiveRecord::Base
   def clean_up_brews
     self.brew = self.brew.try(:titleize)
     self.brewery = self.brewery.try(:titleize)
-    self.style = self.style.try(:titleize)
+    self.style = self.style.try(:titleize) unless self.style == "IPA"
   end
   
 end

@@ -13,19 +13,23 @@
 	    <%= sortable "ibu" %>
 	  <th>
 		<%= sortable "year" %>
-	  <th>
+	  <th class="rating">
 		<%= sortable "average_rating", "avg rating" %>
 	  <% if current_user.present? %>
-	  <th>
+	  <th class="rating">
 		<%= params[:action] == "my_beers" ? (sortable "rate", "your rating") : (link_to "your rating", my_beers_path) %>
 	  <% end %>
+	  <% if params[:action] == "index" %>
 	  <th>
 		<div class="" style="text-align:left;">
 		  <button class="new-beer-row btn btn-primary">new beer</a>
 		</div>
 	<tr class="beer-row" style="display: none;" id="new-beer-row">
-	  <%= form_for Beer.new do |f| %>
-	    <%= render 'beers/fields', :f => f %>
+	    <%= form_for Beer.new do |f| %>
+	      <%= render 'beers/fields', :f => f %>
+	    <% end %>
+	  <% else %>
+	  <%= link_to "all beers", beers_path, :class => "btn btn-primary" %>
 	  <% end %>
 	
 	
@@ -43,9 +47,9 @@
 		<%= beer.ibu %>
 	  <td>
 		<%= beer.year %>
-	  <td>
+	  <td class="rating">
 		<%= beer.average_rating.round(1) %>
-	  <td>
+	  <td class="rating">
 		<% if current_user.present? %>
 		  <% rating = Rating.find_by_user_id_and_beer_id(current_user.id, beer.id) %>
 		  <a data-toggle="modal" href="#rate-beer-<%= beer.id %>">
@@ -76,7 +80,7 @@
 		</div>		  
 		<% end %>
 	  <td style="width: 80px;">
-		<button id="<%= beer.id %>" data-toggle="collapse" data-target="#beer-form-<%= beer.id %>" class="beer-row btn">edit</button>
+		<button id="<%= beer.id %>" data-toggle="collapse" data-target="#beer-form-<%= beer.id %>" class="beer-row btn edit-button">edit</button>
 	  </tr>
       <tr id="beer-row-<%= beer.id %>" class="beer-row" style="display: none;">
 		  <%= form_for beer do |f| %>

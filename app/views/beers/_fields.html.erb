@@ -4,5 +4,5 @@
 <td>  	<%= f.text_field :abv, :class => "abv_year" %>
 <td>	<%= f.text_field :ibu, :class => "abv_year" %>
 <td>	<%= f.text_field :year, :class => "abv_year" %>
-<td>
 <td> 	<%= f.submit "submit", :class=>"beer-submit btn-primary" %>
+<td>    <%= link_to "cancel", beers_path, :class => "btn cancel" %>
