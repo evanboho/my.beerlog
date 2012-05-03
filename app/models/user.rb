@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
@@ -12,5 +12,9 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates :bio, :length => { :maximum => 200 }
   validates :location, :length => { :maximum => 30 }
+  
+  def build_auth(auth)
+    authentications.build(:provider => auth['provider'], :uid => auth['uid'])
+  end
   
 end
