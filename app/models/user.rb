@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   
-  has_many :ratings
+  has_many :ratings,          :dependent => :destroy
+  has_many :authentications,  :dependent => :destroy
   
   validates_presence_of :email
   validates :bio, :length => { :maximum => 200 }
