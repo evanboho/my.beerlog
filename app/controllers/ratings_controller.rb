@@ -15,4 +15,10 @@ class RatingsController < ApplicationController
     end
   end  
   
+  def update
+    @rating = Rating.find(params[:id])
+    @rating = @rating.update_attributes(params[:rating])
+    redirect_to beers_path
+  end
+  
 end

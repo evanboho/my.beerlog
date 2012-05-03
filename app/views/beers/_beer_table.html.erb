@@ -15,8 +15,10 @@
 		<%= sortable "year" %>
 	  <th>
 		<%= sortable "average_rating", "avg rating" %>
+	  <% if current_user.present? %>
 	  <th>
-		<%= sortable "rate", "your rating" if current_user.present? %>
+		<%= params[:action] == "my_beers" ? (sortable "rate", "your rating") : (link_to "your rating", my_beers_path) %>
+	  <% end %>
 	  <th>
 		<div class="" style="text-align:left;">
 		  <button class="new-beer-row btn btn-primary">new beer</a>
@@ -45,17 +47,24 @@
 		<%= beer.average_rating.round(1) %>
 	  <td>
 		<% if current_user.present? %>
-		<% unless rating = Rating.find_by_user_id_and_beer_id(current_user.id, beer.id) %>
-		<a data-toggle="modal" href="#rate-beer-<%= beer.id %>">rate</a>
+		  <% rating = Rating.find_by_user_id_and_beer_id(current_user.id, beer.id) %>
+		  <a data-toggle="modal" href="#rate-beer-<%= beer.id %>">
+		<% if rating.present? %>
+		  <% @rating = rating %>
+		  <%= @rating.rate.round(1) %>
+	    <% else %>	
+		  <% @rating = Rating.new %>
+		  rate
+		<% end %>
+		</a>
 		<div class="modal hide fade" id="rate-beer-<%= beer.id %>">
 		  <div class="modal-header">
 		    <button class="close" data-dismiss="modal">×</button>
 		    <h3>Rate <%= beer.brew %></h3>
 		  </div>
 		  <div class="modal-body">
-		    <% @rating = Rating.new %>
 			<%= form_for @rating do |f| %>
-			  <%= f.hidden_field(:beer_id, :value => beer.id)%>
+			  <%= f.hidden_field(:beer_id, :value => beer.id) %>
 			  <%= f.text_field :rate %>
 			<%= f.submit %>
 			<% end %>  
@@ -64,12 +73,7 @@
 		    <a href="#" class="btn">Close</a>
 		    <a href="#" class="btn btn-primary">Save changes</a>
 		  </div>
-		</div>
-		<% else %>
-		  <%= rating.rate.round(1) %>
-		<% end %>
-		<% else %>
-		  
+		</div>		  
 		<% end %>
 	  <td style="width: 80px;">
 		<button id="<%= beer.id %>" data-toggle="collapse" data-target="#beer-form-<%= beer.id %>" class="beer-row btn">edit</button>
