@@ -1,0 +1,10 @@
+<div class="span7" style="text-align:right;">
+<%= form_tag beers_path, :method => :get, :id => "beer_search" do %>
+    <td colspan=5 style="text-align: center;">
+	  <%= text_field_tag :search %> 
+	  <%= submit_tag "search", :class => "btn btn-primary" %>
+  <% end %>
+</div>
+<div id="beer_table">
+  <%= render 'beer_table' %>
+</div>

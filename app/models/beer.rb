@@ -4,6 +4,8 @@ class Beer < ActiveRecord::Base
   
   before_save :clean_up_brews
   
+  has_many :ratings
+  
   def self.search(search)
     results = Beer.where('brewery LIKE ?', "%#{search.try(:titleize)}%")   
     if results.empty?

@@ -2,10 +2,21 @@ class BeersController < ApplicationController
   
   def index
     get_beers
+    if @beers.empty?
+      @beer = Beer.new
+      render 'new'
+    end
   end
   
   def my_beers
-    
+    # ids = get_ratings
+    get_beers
+    brs = []
+    get_ratings.each do |id|
+      brs << @beers.find(id)
+    end
+    @beers = brs
+    render 'index'
   end
   
   def new
@@ -14,6 +25,7 @@ class BeersController < ApplicationController
   
   def create
     @beer = Beer.create!(params[:beer])
+    @beer.average_rating = @beer.rating_count = 0
     if @beer.save
       redirect_to beers_path
     else

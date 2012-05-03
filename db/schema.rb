@@ -31,14 +31,16 @@ ActiveRecord::Schema.define(:version => 20120430051607) do
     t.string   "style"
     t.string   "abv"
     t.string   "ibu"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.float    "average_rating"
+    t.integer  "rating_count"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "ratings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "beer_id"
-    t.integer  "rate"
+    t.float    "rate"
     t.string   "tasted_on"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

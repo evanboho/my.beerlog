@@ -8,6 +8,8 @@ Beerlog::Application.routes.draw do
   end
   
   resources :beers, :only => [ :index, :new, :create, :edit, :update ]
+  resources :ratings, :only => [ :create ]
+  match "my_beers" => "beers#my_beers"
 
   resources :pages
   root :to => "pages#index"
