@@ -12,7 +12,7 @@ Beerlog::Application.routes.draw do
   match "my_beers" => "beers#my_beers"
 
   resources :pages
-  root :to => "pages#index"
+  root :to => "beers#index"
   
 
   
