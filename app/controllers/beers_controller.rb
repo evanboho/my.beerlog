@@ -6,17 +6,16 @@ class BeersController < ApplicationController
       @beer = Beer.new
       render 'new'
     end
-    @beers.paginate(:page => params[:page], :per_page => 10)
+    @beers = @beers.paginate(:page => params[:page], :per_page => 3)
   end
   
   def my_beers
-    # ids = get_ratings
     get_beers
     brs = []
     get_ratings.each do |id|
       brs << @beers.find(id)
     end
-    @beers = brs
+    @beers = brs.paginate(:page => params[:page], :per_page => 10)
     render 'index'
   end
   

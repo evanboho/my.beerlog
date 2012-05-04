@@ -1,6 +1,7 @@
 class Beer < ActiveRecord::Base
   
   validates_presence_of :brewery, :brew
+  validates_numericality_of :abv_int, :ibu_int
   
   before_save :clean_up_brews
   
