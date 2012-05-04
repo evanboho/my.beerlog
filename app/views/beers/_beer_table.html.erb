@@ -82,7 +82,7 @@
 		<button id="<%= beer.id %>" data-toggle="collapse" data-target="#beer-form-<%= beer.id %>" class="beer-row btn edit-button">edit</button>
 	  </tr>
       <tr id="beer-row-<%= beer.id %>" class="beer-row" style="display: none;">
-		  <%= form_for beer do |f| %>
+		  <%= form_for beer, :method => :put do |f| %>
 		    <%= render 'beers/fields', :f => f %>
 		  <% end %>
 	<% end %>
