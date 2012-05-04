@@ -8,7 +8,9 @@
 	  <th>
 		<%= sortable "style" %>
 	  <th>
-		<%= sortable "abv_int", "ABV" %>
+		<%= sortable "abv", "ABV" %>
+      <th>
+		<%= sortable "abv_int", "ABV_int" %>
 	  <th>
 	    <%= sortable "ibu_int", "ibu" %>
 	  <th class="rating">
@@ -39,7 +41,9 @@
 	  <td>
 		<%= beer.style %>
 	  <td>
-		<%= beer.abv_int %> %
+		<%= beer.abv %> %
+	  <td>
+	    <%= beer.abv_int %> %
 	  <td>
 		<%= beer.ibu_int %>
 	  <td class="rating">
