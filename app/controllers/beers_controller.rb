@@ -6,6 +6,7 @@ class BeersController < ApplicationController
       @beer = Beer.new
       render 'new'
     end
+    @beers.paginate(:page => params[:page], :per_page => 10)
   end
   
   def my_beers

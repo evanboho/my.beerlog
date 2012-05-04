@@ -11,8 +11,6 @@
 		<%= sortable "abv", "ABV" %>
 	  <th>
 	    <%= sortable "ibu_int", "ibu" %>
-	  <th>
-		<%= sortable "year" %>
 	  <th class="rating">
 		<%= sortable "average_rating", "avg rating" %>
 	  <th class="rating">
@@ -37,15 +35,13 @@
 	  <td>
 		<%= beer.brewery %>
 	  <td>
-		<%= beer.brew %>
+		<%= beer.brew %> <%= "- #{beer.year}" if beer.year.present? %>
 	  <td>
 		<%= beer.style %>
 	  <td>
 		<%= beer.abv %> %
 	  <td>
 		<%= beer.ibu_int %>
-	  <td>
-		<%= beer.year %>
 	  <td class="rating">
 		<%= beer.average_rating.round(1) %>
 	  <td class="rating">
@@ -86,4 +82,6 @@
 		    <%= render 'beers/fields', :f => f %>
 		  <% end %>
 	<% end %>
+	<tr>
+		<td>
 </table>
