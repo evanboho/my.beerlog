@@ -10,7 +10,7 @@
 	  <th>
 		<%= sortable "abv", "ABV" %>
 	  <th>
-	    <%= sortable "ibu" %>
+	    <%= sortable "ibu_int", "ibu" %>
 	  <th>
 		<%= sortable "year" %>
 	  <th class="rating">
@@ -43,7 +43,7 @@
 	  <td>
 		<%= beer.abv %> %
 	  <td>
-		<%= beer.ibu %>
+		<%= beer.ibu_int %>
 	  <td>
 		<%= beer.year %>
 	  <td class="rating">
