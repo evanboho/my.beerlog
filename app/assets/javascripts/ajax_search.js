@@ -1,6 +1,6 @@
 $(function() {
-	$('#beer_table th a, .cancel').live("click", function() {
-		$(".loading").html("loading...");
+	$('#beer_table th.sortable a, .cancel').live("click", function() {
+		$(".loading").html("loading..."); 
 		$.getScript(this.href);
 		return false;
 	});

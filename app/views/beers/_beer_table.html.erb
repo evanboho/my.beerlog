@@ -1,21 +1,26 @@
 <table class="table">
 	<tr class="loading"><td></tr>
 	<tr>
-	  <th>
+	  <th class="sortable">
 		<%= sortable "brewery" %>
-	  <th>
+	  <th class="sortable">
 		<%= sortable "brew", "beer" %>
-	  <th>
+	  <th class="sortable">
 		<%= sortable "style" %>
-      <th>
+      <th class="sortable">
 		<%= sortable "abv_int", "ABV" %>
-	  <th>
+	  <th class="sortable">
 	    <%= sortable "ibu_int", "ibu" %>
-	  <th class="rating">
+	  <th class="rating sortable">
 		<%= sortable "average_rating", "avg rating" %>
-	  <th class="rating">
 	  <% if current_user.present? %>
-		<%= params[:action] == "my_beers" ? (sortable "rate", "your rating") : (link_to "your rating", my_beers_path) %>
+	  <% if params[:action] == "my_beers" %>
+	    <th class="rating sortable">
+		  <%= sortable "rate", "your rating" %>
+	  <% else %> 
+	    <th class="rating">
+	  	  <%= link_to "your rating", my_beers_path %>
+	  <% end %>
 	  <% end %>
 	  <th>
       <% if params[:action] == "index" %>
@@ -35,7 +40,7 @@
 	  <td>
 		<%= beer.brewery %>
 	  <td>
-		<%= beer.brew %> <span style="float: right;"><%= "#{beer.year}" if beer.year.present? %></span>
+		<%= beer.brew %> <span style="float: right;"><%= "#{beer.year}" %></span>
 	  <td>
 		<%= beer.style %>
 	  <td>

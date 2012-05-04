@@ -7,9 +7,9 @@ Beerlog::Application.routes.draw do
     match "/sign_out" => "devise/sessions#destroy", :as => "sign_out"
   end
   
-  resources :beers, :only => [ :index, :new, :create, :edit, :update ]
+  resources :beers #, :only => [ :index, :new, :create, :edit, :update ]
   resources :ratings, :only => [ :create, :edit, :update ]
-  match "my_beers" => "beers#my_beers"
+  get "my_beers" => "beers#my_beers"
 
   resources :pages
   root :to => "beers#index"

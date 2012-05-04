@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div id="debug"><%= render "layouts/debug" %></div>
 	<div class="hero-unit">
 	  <div style="float:right;">
 		<% if !current_user %>
@@ -23,12 +24,6 @@
 	</div>
 	<h1><%= hero.first %></h1>
 	<p> <%= hero.last %></p>
-	<div class="debug">
-	<p><%= controller_name %>#<%= action_name %></p>
-	<p><%= ENV["RAILS_ENV"] %>
-	<p><%= params %>
-	</div>
-		
 	</div>
 	
 	<div class="container">
