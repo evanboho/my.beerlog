@@ -7,8 +7,6 @@
 		<%= sortable "brew", "beer" %>
 	  <th>
 		<%= sortable "style" %>
-	  <th>
-		<%= sortable "abv", "ABV" %>
       <th>
 		<%= sortable "abv_int", "ABV_int" %>
 	  <th>
@@ -40,8 +38,6 @@
 		<%= beer.brew %> <span style="float: right;"><%= "#{beer.year}" if beer.year.present? %></span>
 	  <td>
 		<%= beer.style %>
-	  <td>
-		<%= beer.abv %> %
 	  <td>
 	    <%= beer.abv_int %> %
 	  <td>
