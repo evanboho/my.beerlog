@@ -12,8 +12,29 @@ td {
   vertical-align: top;
 }
 
+.current {
+  font-size: 1.5em;
+  padding-right: 18px;
+  background-repeat: no-repeat;
+  background-position: right;  
+}
+
+a.asc {
+  background-size: 12px 12px;
+  background-image: url(/sort_arrow_down.png);
+}
+
+a.desc {
+  background-size: 12px 12px;
+  background-image: url(/sort_arrow.png);
+}
+
 input {
   width: auto;
+}
+
+#loading {
+  font-size: 1.5em;
 }
 
 .beer-row td {
@@ -33,4 +54,17 @@ input.abv_year {
 
 input.beer-submit {
   width: 50px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+.visible {
+  visibility: visible;
+}
+
+.dim {
+  zoom: 1;
+  filter: alpha(opacity=50);
+  opacity: 0.5;
 }

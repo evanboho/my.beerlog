@@ -10,13 +10,13 @@ class Beer < ActiveRecord::Base
   private
   
   def self.search(search)
-    # search = titleize_and_upcase(search.split(' '))
-    b = search.split(' ')
-    i = []
-    b.each do |f|
-      f.downcase != "ipa" ? i << f.try(:titleize) : i << f.try(:upcase)
-    end
-    search = i.join(' ')
+    search = titleize_and_upcase(search.split(' '))
+    # b = search.split(' ')
+    #     i = []
+    #     b.each do |f|
+    #       f.downcase != "ipa" ? i << f.try(:titleize) : i << f.try(:upcase)
+    #     end
+    #     search = i.join(' ')
     results = Beer.where('brewery LIKE ?', "%#{search}%")   
     if results.empty?
       results = Beer.where('brew LIKE ?', "%#{search}%")   
@@ -35,6 +35,14 @@ class Beer < ActiveRecord::Base
   end
   
   def titleize_and_upcase(b)
+    i = []
+    b.each do |f|
+      f.downcase != "ipa" ? i << f.try(:titleize) : i << f.try(:upcase)
+    end
+    i.join(' ')
+  end
+  
+  def self.titleize_and_upcase(b)
     i = []
     b.each do |f|
       f.downcase != "ipa" ? i << f.try(:titleize) : i << f.try(:upcase)

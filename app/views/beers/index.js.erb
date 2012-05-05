@@ -5,6 +5,5 @@ $.ajaxSetup({
     }
 });
 
-$("#beer_table").html("<%= escape_javascript(render("beer_table")) %>");
+$("#beer_table").html("<%= escape_javascript(render("beer_table")) %>").removeClass("dim");
 $("#debug").html("<%= escape_javascript(render("layouts/debug")) %>");
-$(".loading").html("");

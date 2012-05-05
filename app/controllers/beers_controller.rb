@@ -1,5 +1,7 @@
 class BeersController < ApplicationController
   
+  respond_to :html, :json
+  
   def index
     get_beers
     if @beers.empty?

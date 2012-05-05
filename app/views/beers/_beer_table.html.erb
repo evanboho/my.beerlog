@@ -1,5 +1,5 @@
+<div id="loading" class="hidden" style="clear:both; float:left;">loading... </div>
 <table class="table">
-	<tr class="loading"><td></tr>
 	<tr>
 	  <th class="sortable">
 		<%= sortable "brewery" %>
@@ -38,11 +38,11 @@
 	<% @beers.each do |beer| %>
 	<tr>
 	  <td>
-		<%= beer.brewery %>
+		<%= link_to beer.brewery, params.merge(:search => beer.brewery) %>
 	  <td>
 		<%= beer.brew %> <span style="float: right;"><%= "#{beer.year}" %></span>
 	  <td>
-		<%= beer.style %>
+		<%= link_to beer.style, params.merge(:search => beer.style) %>
 	  <td>
 	    <%= beer.abv_int %> %
 	  <td>
@@ -69,6 +69,7 @@
 		  <div class="modal-body" style="text-align: center;">
 			<%= form_for @rating do |f| %>
 			  <%= f.hidden_field(:beer_id, :value => beer.id) %>
+			  <%= f.hidden_field(:authenticity_token, :value => form_authenticity_token)%>
 			  <%= f.text_field :rate %>
 			<%= f.submit :class => "btn btn-primary" %>
 			<% end %>  
