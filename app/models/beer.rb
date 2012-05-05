@@ -1,21 +1,32 @@
 class Beer < ActiveRecord::Base
   
   validates_presence_of :brewery, :brew
-  # validates_numericality_of :abv_int, :ibu_int
+  validates_numericality_of :abv_int, :ibu_int, allow_blank: true
   
   before_save :clean_up_brews
   
   has_many :ratings
   
+  private
+  
   def self.search(search)
-    results = Beer.where('brewery LIKE ?', "%#{search.try(:titleize)}%")   
+    # search = titleize_and_upcase(search.split(' '))
+    b = search.split(' ')
+    i = []
+    b.each do |f|
+      f.downcase != "ipa" ? i << f.try(:titleize) : i << f.try(:upcase)
+    end
+    search = i.join(' ')
+    results = Beer.where('brewery LIKE ?', "%#{search}%")   
     if results.empty?
-      results = Beer.where('brew LIKE ?', "%#{search.try(:titleize)}%")   
+      results = Beer.where('brew LIKE ?', "%#{search}%")   
+    end
+    if results.empty?
+      results = Beer.where('style LIKE ?', "%#{search}%")
+      # flash[:notice] = "No results were found."
     end
     results
   end
-  
-  private
   
   def clean_up_brews
     self.brew = titleize_and_upcase(self.brew.split(' '))
