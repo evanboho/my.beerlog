@@ -18,7 +18,12 @@ class Beer < ActiveRecord::Base
   private
   
   def clean_up_brews
-    self.brew = self.brew.try(:titleize) unless self.brew.split(' ').last == "IPA"
+    s = self.brew.split(' ')
+    unless s.include?("ipa" || "IPA" || "Ipa")
+      self.brew = self.brew.try(:titleize)
+    else
+      s.last 
+    end
     self.brewery = self.brewery.try(:titleize)
     # self.style = self.style.try(:titleize) unless self.style == "IPA"
   end
