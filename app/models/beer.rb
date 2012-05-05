@@ -18,14 +18,17 @@ class Beer < ActiveRecord::Base
   private
   
   def clean_up_brews
-    s = self.brew.split(' ')
-    unless s.include?("ipa" || "IPA" || "Ipa")
-      self.brew = self.brew.try(:titleize)
-    else
-      s.last 
-    end
+    self.brew = titleize_and_upcase(self.brew.split(' '))
     self.brewery = self.brewery.try(:titleize)
-    # self.style = self.style.try(:titleize) unless self.style == "IPA"
+    self.style = titleize_and_upcase(self.style.split(' '))
+  end
+  
+  def titleize_and_upcase(b)
+    i = []
+    b.each do |f|
+      f.downcase != "ipa" ? i << f.try(:titleize) : i << f.try(:upcase)
+    end
+    i.join(' ')
   end
   
 end
