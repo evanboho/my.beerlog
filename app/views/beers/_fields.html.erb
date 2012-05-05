@@ -1,7 +1,7 @@
 <td>	<%= f.text_field :brewery %>
-<td>	<%= f.text_field :brew %> year: <%= f.text_field :year, :class => "abv_year" %>
+<td>	<%= f.text_field :brew %><%= f.text_field :year, :placeholder => "(year)", :class => "abv_year", :style => "float: right;" %>
 <td>	<%= f.text_field :style %>
 <td>    <%= f.text_field :abv_int, :class => "abv_year" %>
 <td>	<%= f.text_field :ibu_int, :class => "abv_year" %>
-<td> 	<%= f.submit "submit", :class=>"beer-submit btn-primary" %>
-<td>    <%= link_to "cancel", beers_path, :class => "btn cancel" %>
+<td>
+<td>    <%= f.submit "submit", :class=>"beer-submit btn-primary" %>

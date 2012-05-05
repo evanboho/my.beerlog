@@ -25,7 +25,7 @@
 	  <th>
       <% if params[:action] == "index" %>
 		<div class="" style="text-align:left;">
-		  <button class="new-beer-row btn btn-primary">new beer</a>
+		  <button id="new-beer" class="new-beer-row btn btn-primary">new beer</a>
 		</div>
 	<tr class="beer-row" style="display: none;" id="new-beer-row">
 	    <%= form_for Beer.new do |f| %>
@@ -49,8 +49,8 @@
 		<%= beer.ibu_int %>
 	  <td class="rating">
 		<%= beer.average_rating.round(1) %>
+	  <% if current_user.present? %>
 	  <td class="rating">
-		<% if current_user.present? %>
 		  <% rating = Rating.find_by_user_id_and_beer_id(current_user.id, beer.id) %>
 		  <a data-toggle="modal" href="#rate-beer-<%= beer.id %>">
 		<% if rating.present? %>

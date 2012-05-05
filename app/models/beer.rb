@@ -7,16 +7,10 @@ class Beer < ActiveRecord::Base
   
   has_many :ratings
   
-  private
+  # private
   
   def self.search(search)
-    search = titleize_and_upcase(search.split(' '))
-    # b = search.split(' ')
-    #     i = []
-    #     b.each do |f|
-    #       f.downcase != "ipa" ? i << f.try(:titleize) : i << f.try(:upcase)
-    #     end
-    #     search = i.join(' ')
+    search = titleize_and_upcase(search)
     results = Beer.where('brewery LIKE ?', "%#{search}%")   
     if results.empty?
       results = Beer.where('brew LIKE ?', "%#{search}%")   
@@ -29,23 +23,23 @@ class Beer < ActiveRecord::Base
   end
   
   def clean_up_brews
-    self.brew = titleize_and_upcase(self.brew.split(' '))
+    self.brew = self.titleize_and_upcase(self.brew)
     self.brewery = self.brewery.try(:titleize)
-    self.style = titleize_and_upcase(self.style.split(' '))
+    self.style = self.titleize_and_upcase(self.style)
   end
   
   def titleize_and_upcase(b)
     i = []
-    b.each do |f|
-      f.downcase != "ipa" ? i << f.try(:titleize) : i << f.try(:upcase)
+    b.split(' ').each do |f|
+      i << (f.downcase != "ipa" ? f.try(:titleize) : f.try(:upcase))
     end
     i.join(' ')
   end
   
   def self.titleize_and_upcase(b)
     i = []
-    b.each do |f|
-      f.downcase != "ipa" ? i << f.try(:titleize) : i << f.try(:upcase)
+    b.split(' ').each do |f|
+      i << (f.downcase != "ipa" ? f.try(:titleize) : f.try(:upcase))
     end
     i.join(' ')
   end
