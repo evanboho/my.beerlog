@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('#beer_table th.sortable a, .cancel, .pagination a').live("click", function() {
+	$('#beer_table th.sortable a, .cancel, .nice_pagination a').live("click", function() {
 		$("#beer_table").addClass("dim");
 		$.getScript(this.href);
 		return false;
