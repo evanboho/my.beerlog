@@ -69,7 +69,6 @@
 		  <div class="modal-body" style="text-align: center;">
 			<%= form_for @rating do |f| %>
 			  <%= f.hidden_field(:beer_id, :value => beer.id) %>
-			  <%= f.hidden_field(:authenticity_token, :value => form_authenticity_token)%>
 			  <%= f.text_field :rate %>
 			<%= f.submit :class => "btn btn-primary" %>
 			<% end %>  
