@@ -79,10 +79,10 @@
 		</div>		  
 		<% end %>
 	  <td style="width: 80px;">
-		<button id="<%= beer.id %>" data-toggle="collapse" data-target="#beer-form-<%= beer.id %>" class="beer-row btn edit-button">edit</button>
+		<button data-id="<%= beer.id %>" data-toggle="collapse" data-target="#beer-form-<%= beer.id %>" class="beer-row btn edit-button">edit</button>
 	  </tr>
-      <tr id="beer-row-<%= beer.id %>" class="beer-row" style="display: none;">
-		  <%= form_for beer, :method => :put do |f| %>
+      <tr id="beer-row-<%= beer.id %>" class="beer-row edit-beer-row" style="display: none;">
+		  <%= form_for beer, :as => :beer, :url => beer_path(beer), :method => :put do |f| %>
 		    <%= render 'beers/fields', :f => f %>
 		  <% end %>
 	<% end %>

@@ -1,5 +1,5 @@
 jQuery -> 
-  $("button.beer-row").live("click", ->
+  $("button.beeer-row").live("click", ->
     id = $(this).attr('id')
     $('tr#beer-row-' + id).toggle()
     # $('.rating').toggle()

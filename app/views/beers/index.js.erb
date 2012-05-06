@@ -1,9 +1,2 @@
-$.ajaxSetup({
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader('X-CSRF-Token',
-                             $('meta[name="csrf-token"]').attr('content'));
-    }
-});
-
 $("#beer_table").html("<%= escape_javascript(render("beer_table")) %>").removeClass("dim");
 $("#debug").html("<%= escape_javascript(render("layouts/debug")) %>");

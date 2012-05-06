@@ -46,7 +46,10 @@ class BeersController < ApplicationController
   def update
     @beer = Beer.find(params[:id])
     @beer.update_attributes(params[:beer])
-    redirect_to beers_path
+    respond_to do |format|
+      format.html { redirect_to beers_path }
+      format.js
+    end
   end
   
   def destroy
