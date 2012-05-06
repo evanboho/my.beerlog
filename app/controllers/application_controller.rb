@@ -14,8 +14,7 @@ class ApplicationController < ActionController::Base
   
   def get_ratings
     direction = params[:direction] == "asc" ? "desc" : "asc"
-    ratings = current_user.ratings
-    ratings = ratings.reorder("rate" + ' ' + direction)
+    ratings = current_user.ratings.order("rate" + ' ' + direction)
     ids = []
     ratings.each do |rating|
       ids << rating.beer_id
