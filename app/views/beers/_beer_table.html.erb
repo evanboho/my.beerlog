@@ -19,7 +19,7 @@
 		  <%= sortable "rate", "your rating" %>
 	  <% else %> 
 	    <th class="rating">
-	  	  <%= link_to "your rating", my_beers_path %>
+	  	  <%= link_to "your rating", my_beers_path(:sort => "rate")%>
 	  <% end %>
 	  <% end %>
 	  <th>
