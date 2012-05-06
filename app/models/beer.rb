@@ -23,17 +23,9 @@ class Beer < ActiveRecord::Base
   end
   
   def clean_up_brews
-    self.brew = self.titleize_and_upcase(self.brew)
+    self.brew = Beer.titleize_and_upcase(self.brew)
     self.brewery = self.brewery.try(:titleize)
-    self.style = self.titleize_and_upcase(self.style)
-  end
-  
-  def titleize_and_upcase(b)
-    i = []
-    b.split(' ').each do |f|
-      i << (f.downcase != "ipa" ? f.try(:titleize) : f.try(:upcase))
-    end
-    i.join(' ')
+    self.style = Beer.titleize_and_upcase(self.style)
   end
   
   def self.titleize_and_upcase(b)
