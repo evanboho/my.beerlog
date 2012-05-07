@@ -38,11 +38,11 @@
 	<% @beers.each do |beer| %>
 	<tr>
 	  <td>
-		<%= link_to beer.brewery, params.merge(:search => beer.brewery) %>
+		<%= link_to beer.brewery, params.merge(:search => beer.brewery), :class => "link-search" %>
 	  <td>
 		<%= beer.brew %> <span style="float: right;"><%= "#{beer.year}" %></span>
 	  <td>
-		<%= link_to beer.style, params.merge(:search => beer.style) %>
+		<%= link_to beer.style, params.merge(:search => beer.style), :class => "link-search" %>
 	  <td>
 	    <%= beer.abv_int %> %
 	  <td>
