@@ -9,17 +9,21 @@ class Beer < ActiveRecord::Base
   
   # private
   
-  def self.search(search)
+  def self.searchh(search)
     search = titleize_and_upcase(search)
-    results = Beer.where('brewery LIKE ?', "%#{search}%")   
+    results = Beer.where('brewery LIKE ?', "%#{search}%")
     if results.empty?
-      results = Beer.where('brew LIKE ?', "%#{search}%")   
+      results = Beer.where('brew LIKE ?', "%#{search}%")
     end
     if results.empty?
       results = Beer.where('style LIKE ?', "%#{search}%")
       # flash[:notice] = "No results were found."
     end
     results
+  end
+  
+  def self.search(search)
+    where("brewery ilike :s or brew ilike :s or style ilike :s", s: "%#{search}%")
   end
   
   def clean_up_brews
