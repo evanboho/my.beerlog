@@ -7,11 +7,10 @@ class RatingsController < ApplicationController
     rating += @rating.rate
     beer.rating_count += 1
     beer.average_rating = ( rating / beer.rating_count ).round(2)
-    if beer.save
-      redirect_to beers_path
-    else 
-      flash[:notice] = "OOps."
-      redirect_to beers_path
+    beer.save
+    respond_to do |format|
+      format.html {redirect_to beers_path}
+      format.js render 'update'
     end
   end  
   
@@ -22,7 +21,10 @@ class RatingsController < ApplicationController
     @rating.beer.average_rating = 
       (( @rating.beer.average_rating * @rating.beer.rating_count - old_rating + @rating.rate ) / @rating.beer.rating_count).round(2)
     @rating.beer.save
-    redirect_to beers_path
+    respond_to do |format|
+      format.html {redirect_to beers_path}
+      format.js
+    end  
   end
   
 end

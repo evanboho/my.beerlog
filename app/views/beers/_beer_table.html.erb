@@ -48,12 +48,12 @@
 	    <%= beer.abv_int %> %
 	  <td>
 		<%= beer.ibu_int unless beer.ibu_int == 0 %>
-	  <td class="rating">
-		<%= beer.average_rating.round(1) %>
+	  <td class="rating" id="average_rating_<%= beer.id %>">
+		<%= beer.average_rating != 0 ? beer.average_rating.round(1) : "n/a" %>
 	  <% if current_user.present? %>
 	  <td class="rating">
 		  <% rating = Rating.find_by_user_id_and_beer_id(current_user.id, beer.id) %>
-		  <a data-toggle="modal" href="#rate-beer-<%= beer.id %>">
+		  <a data-toggle="modal" href="#rate-beer-<%= beer.id %>" id="rating_<%= beer.id %>">
 		<% if rating.present? %>
 		  <% @rating = rating %>
 		  <%= @rating.rate.round(1) %>
@@ -61,14 +61,14 @@
 		  <% @rating = Rating.new %>
 		  rate
 		<% end %>
-		</a>
-		<div class="modal hide fade" id="rate-beer-<%= beer.id %>">
+	  </a>
+     	<div class="modal hide fade modal-rating" id="rate-beer-<%= beer.id %>">
 		  <div class="modal-header">
 		    <button class="close" data-dismiss="modal">×</button>
 		    <h2>Rate: <%= beer.brewery %> <%= beer.brew %></h2>
 		  </div>
 		  <div class="modal-body" style="text-align: center;">
-			<%= form_for @rating do |f| %>
+			<%= form_for @rating, :class => "beer" do |f| %>
 		   	  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 			  <%= f.hidden_field(:beer_id, :value => beer.id) %>
 			  <%= f.text_field :rate %>
