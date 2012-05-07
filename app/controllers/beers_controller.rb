@@ -17,8 +17,8 @@ class BeersController < ApplicationController
     get_ratings.each do |id|
       brs << @beers.find(id)
     end
-    brs = brs.sort_by{|b| b[sort_column]} if %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "asc"
-    brs = brs.sort_by{|b| -b[sort_column]} if %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "desc"
+    brs = brs.sort_by{|b| -b[sort_column]} if %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "asc"
+    brs = brs.sort_by{|b| b[sort_column]} if %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "desc"
     brs = brs.sort! { |a, b| a[sort_column] <=> b[sort_column] } if %[brewery beer style].include?(sort_column) && sort_direction == "asc"
     brs = brs.sort! { |a, b| b[sort_column] <=> a[sort_column] } if %[brewery beer style].include?(sort_column) && sort_direction == "desc"
     @beers = brs.paginate(:page => params[:page], :per_page => 10)
