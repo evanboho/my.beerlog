@@ -10,7 +10,7 @@ class RatingsController < ApplicationController
     beer.save
     respond_to do |format|
       format.html {redirect_to beers_path}
-      format.js render 'update'
+      format.js
     end
   end  
   
