@@ -4,6 +4,7 @@ class Beer < ActiveRecord::Base
   validates_numericality_of :abv_int, :ibu_int, allow_blank: true
   
   before_save :clean_up_brews
+  before_save :ibu_to_zero
   
   has_many :ratings
   
@@ -30,6 +31,10 @@ class Beer < ActiveRecord::Base
     self.brew = Beer.titleize_and_upcase(self.brew)
     self.brewery = self.brewery.try(:titleize)
     self.style = Beer.titleize_and_upcase(self.style)
+  end
+  
+  def ibu_to_zero
+    self.ibu_int ||= 0
   end
   
   def self.titleize_and_upcase(b)

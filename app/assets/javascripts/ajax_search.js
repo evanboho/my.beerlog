@@ -11,7 +11,6 @@ $(document).ready(function() {
 	$('#beer_table th.sortable a, a.link-search, .nice_pagination a').live("click", function() {
 		$("#beer_table").addClass("dim");
 		$.getScript(this.href);
-		// alert(this.href);
 		return false;
 	});
 	$('#beer_search').submit(function() {

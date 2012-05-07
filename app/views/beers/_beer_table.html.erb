@@ -19,7 +19,7 @@
 		  <%= sortable "rate", "your rating" %>
 	  <% else %> 
 	    <th class="rating">
-	  	  <%= link_to "your rating", my_beers_path(params.merge(:sort => "rate", :direction => "asc"))%>
+	  	  <%= link_to "your rating", my_beers_path %>
 	  <% end %>
 	  <% end %>
 	  <th>
@@ -29,6 +29,7 @@
 		</div>
 	<tr class="beer-row" style="display: none;" id="new-beer-row">
 	    <%= form_for Beer.new do |f| %>
+		  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 	      <%= render 'beers/fields', :f => f %>
 	    <% end %>
 	  <% else %>
@@ -46,7 +47,7 @@
 	  <td>
 	    <%= beer.abv_int %> %
 	  <td>
-		<%= beer.ibu_int %>
+		<%= beer.ibu_int unless beer.ibu_int == 0 %>
 	  <td class="rating">
 		<%= beer.average_rating.round(1) %>
 	  <% if current_user.present? %>
@@ -68,6 +69,7 @@
 		  </div>
 		  <div class="modal-body" style="text-align: center;">
 			<%= form_for @rating do |f| %>
+		   	  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 			  <%= f.hidden_field(:beer_id, :value => beer.id) %>
 			  <%= f.text_field :rate %>
 			<%= f.submit :class => "btn btn-primary" %>
@@ -75,7 +77,6 @@
 			<br>
 			<p style="font-size: 1.2em;">0.0 (worst) - 10.0 (best)
 		  </div>
-		  
 		</div>		  
 		<% end %>
 	  <td style="width: 80px;">
@@ -83,6 +84,8 @@
 	  </tr>
       <tr id="beer-row-<%= beer.id %>" class="beer-row edit-beer-row" style="display: none;">
 		  <%= form_for beer, :as => :beer, :url => beer_path(beer), :method => :put do |f| %>
+		  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+		
 		    <%= render 'beers/fields', :f => f %>
 		  <% end %>
 	<% end %>

@@ -1,25 +1,29 @@
 class BeersController < ApplicationController
   
+  protect_from_forgery
   respond_to :html, :json
   
   def index
     get_beers
+    order_beers
     if @beers.empty?
       @beers = Beer.scoped
-      # @beer = Beer.new
-      #       render 'new'
     end
     @beers = @beers.paginate(:page => params[:page], :per_page => 10)
   end
   
   def my_beers
     get_beers
+    params[:sort] ||= "rate"
+    params[:direction] ||= "asc"
     brs = []
     get_ratings.each do |id|
       brs << @beers.find(id)
     end
-    brs = brs.sort_by{|b| b[sort_column]} if %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "asc"
-    brs = brs.sort_by{|b| b[sort_column]} if %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "desc"
+    brs =  %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "asc" ? 
+                brs.sort_by{|b| -b[sort_column]} : 
+                brs.sort_by{|b| b[sort_column]}
+    # brs = brs.sort_by{|b| b[sort_column]} if %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "desc"
     brs = brs.sort! { |a, b| a[sort_column] <=> b[sort_column] } if %[brewery beer style].include?(sort_column) && sort_direction == "asc"
     brs = brs.sort! { |a, b| b[sort_column] <=> a[sort_column] } if %[brewery beer style].include?(sort_column) && sort_direction == "desc"
     @beers = brs.paginate(:page => params[:page], :per_page => 10)
@@ -32,11 +36,12 @@ class BeersController < ApplicationController
     else
       @beers = Beer.scoped.includes(:ratings)
     end
-    unless params[:sort] == "rate"
+  end
+  
+  def order_beers
     %w[abv_int ibu_int average_rating rate].include?(sort_column) ? 
       @beers = @beers.reorder(sort_column + ' ' + un_sort_direction) : 
       @beers = @beers.reorder(sort_column + ' ' + sort_direction)
-    end
   end
   
   def get_ratings
