@@ -24,7 +24,7 @@ class BeersController < ApplicationController
         b = @beers.find_by_id(id)
         brs << b unless b.nil?
       end
-      brs =  %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "asc" ? 
+      brs = %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "asc" ? 
                   brs.sort_by{|b| -b[sort_column]} : 
                   brs.sort_by{|b| b[sort_column]}
       brs = brs.sort! { |a, b| a[sort_column] <=> b[sort_column] } if %[brewery beer style].include?(sort_column) && sort_direction == "asc"
