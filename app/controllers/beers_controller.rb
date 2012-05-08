@@ -14,20 +14,24 @@ class BeersController < ApplicationController
   
   def my_beers
     get_beers
-    params[:sort] ||= "rate"
-    params[:direction] ||= "asc"
-    brs = []
-    get_ratings.each do |id|
-      b = @beers.find_by_id(id)
-      brs << b unless b.nil?
+    if !current_user.present?
+      redirect_to beers_path
+    else
+      params[:sort] ||= "rate"
+      params[:direction] ||= "asc"
+      brs = []
+      get_ratings.each do |id|
+        b = @beers.find_by_id(id)
+        brs << b unless b.nil?
+      end
+      brs =  %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "asc" ? 
+                  brs.sort_by{|b| -b[sort_column]} : 
+                  brs.sort_by{|b| b[sort_column]}
+      brs = brs.sort! { |a, b| a[sort_column] <=> b[sort_column] } if %[brewery beer style].include?(sort_column) && sort_direction == "asc"
+      brs = brs.sort! { |a, b| b[sort_column] <=> a[sort_column] } if %[brewery beer style].include?(sort_column) && sort_direction == "desc"
+      @beers = brs.paginate(:page => params[:page], :per_page => 10)
+      render 'index'
     end
-    brs =  %[abv_int ibu_int average_rating].include?(sort_column) && sort_direction == "asc" ? 
-                brs.sort_by{|b| -b[sort_column]} : 
-                brs.sort_by{|b| b[sort_column]}
-    brs = brs.sort! { |a, b| a[sort_column] <=> b[sort_column] } if %[brewery beer style].include?(sort_column) && sort_direction == "asc"
-    brs = brs.sort! { |a, b| b[sort_column] <=> a[sort_column] } if %[brewery beer style].include?(sort_column) && sort_direction == "desc"
-    @beers = brs.paginate(:page => params[:page], :per_page => 10)
-    render 'index'
   end
   
   def get_beers
