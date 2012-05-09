@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120504010846) do
+ActiveRecord::Schema.define(:version => 20120509175832) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20120504010846) do
     t.string   "tasted_on"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.text     "comment"
   end
 
   add_index "ratings", ["user_id", "beer_id"], :name => "index_ratings_on_user_id_and_beer_id"

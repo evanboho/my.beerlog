@@ -5,16 +5,29 @@
 </div>
 
 <div class="modal-body" style="text-align: center;">
+ 
+  <div style="width: 395px; text-align: left; margin-left: auto; margin-right: auto;">
+
+  <div style="width:65px; float:left;"><b>rating:</div>
+  <div style="margin-left: 20px;float:left;">comment:</b></div>
+
+  </div>
+
+  <div style="clear: both;">
   <%= form_for @rating, :class => "beer form-horizontal" do |f| %>
     <fieldset>
   	  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
       <%= f.hidden_field(:beer_id, :value => beer.id) %>
       <span class="rating_field">
-        <%= f.text_field :rate, :class => "" %>
+        <%= f.text_field :rate, :class => "rate_field" %>
       </span>
+ 	  <span class="comment_field">
+	      <%= f.text_area :comment, :class => "comment_field" %>
+    </span><br>
       <%= f.submit :class => "btn btn-primary" %>
     </fieldset>
   <% end %>  
+  </div>
   <br>
   <p style="font-size: 1.2em;">0.0 (worst) - 10.0 (best)
 </div>		

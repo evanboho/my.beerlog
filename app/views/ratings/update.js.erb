@@ -2,14 +2,19 @@ $('.modal-body').removeClass("dim");
 <% if @rating.valid? %>
   // $('#rating_modal_' + <%= @rating.beer.id %>).html('<%= escape_javascript(render('ratings/rating_modal', :beer => @rating.beer)) %>');
   $('.modal').modal('hide');
-  $('.rating_field').removeClass("error");
+  $('.rating_field, .comment_field').removeClass("error");
   $("#rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.rate.to_s) %>");
   $("#average_rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.beer.average_rating.round(1).to_s) %>");
   $("#flash_messages").html('<%= escape_javascript(render('layouts/alerts')) %>');
 <% else %>
-  $(".rating_field").addClass("control-group error");
+  <% if @rating.errors[:rate].present? %>
+    $(".rating_field").addClass("control-group error");
+    <% flash.now[:error] = "rating must be between 0 - 10." %>
+  <% else %>
+    $(".comment_field").addClass("control-group error");
+    <% flash.now[:error] = "your comment is too long." %> 
+  <% end %>
   $("#edit_rating_" + <%= @rating.id %>)[0].reset();
-  <% @rating.errors[:rate].present? ? flash.now[:error] = "rating must be between 0 - 10." : "your comment is wrong."  %>
   $("#rating_flash_" + <%= @rating.beer.id %>).html('<%= escape_javascript(render('layouts/alerts')) %>');
 <% end %>
-$('.alert').delay(700).fadeOut(2000);
+$('.alert').delay(1200).fadeOut(1200);

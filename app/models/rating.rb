@@ -7,10 +7,7 @@ class Rating < ActiveRecord::Base
   validates_presence_of :rate
   validates_inclusion_of :rate, :in => 0..11
   validates_numericality_of :rate
-  # validates_each :user_id, :beer_id do |record, attr, value|
-  #   record.errors.add(attr, 'can only rate each beer once.') if 1 == 1
-  # end
-  # validates_with UserBeerUniqueness, :except => [ :update ]
+  validates :comment, :length => { :maximum => 200 }
   validate :user_beer_uniqueness, :on => :create
   
   def user_beer_uniqueness

@@ -105,3 +105,15 @@ input.beer-submit {
   @include inset-shadow;
   background-color: white;
 }
+
+.rate_field {
+  width: 70px;
+  text-align: center;
+  margin: 0px 0px 20px 0px;
+  height: 70px;
+  font-size: 2.5em;
+}
+textarea.comment_field {
+  width: 300px;
+  height: 70px;
+}

@@ -6,7 +6,12 @@ $(".modal-body").removeClass("dim");
   $("#average_rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.beer.average_rating.round(1).to_s) %>");
   $("#flash_messages").html('<%= escape_javascript(render('layouts/alerts')) %>');
 <% else %>
-  $(".new_rating").addClass("control-group error");
+  <% if @rating.errors[:rate].present? %>
+    $(".rating_field").addClass("control-group error");
+  <% else %>
+   $(".comment_field").addClass("control-group error");
+  <% end %> 
+    
   $("form.new_rating")[0].reset();
   <% @rating.errors[:rate].present? ? flash.now[:error] = "rating must be between 0 - 10." : "your comment is wrong."  %>
   $("#rating_flash_" + <%= @rating.beer.id %>).html('<%= escape_javascript(render('layouts/alerts')) %>');
