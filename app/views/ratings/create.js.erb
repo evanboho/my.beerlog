@@ -7,7 +7,7 @@ $(".modal-body").removeClass("dim");
   $("#flash_messages").html('<%= escape_javascript(render('layouts/alerts')) %>');
 <% else %>
   $(".new_rating").addClass("control-group error");
-  $("#new_rating")[0].reset();
+  $("form.new_rating")[0].reset();
   <% @rating.errors[:rate].present? ? flash.now[:error] = "rating must be between 0 - 10." : "your comment is wrong."  %>
   $("#rating_flash_" + <%= @rating.beer.id %>).html('<%= escape_javascript(render('layouts/alerts')) %>');
 <% end %>
