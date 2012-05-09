@@ -1,4 +1,4 @@
-$(".modal").removeClass("dim");
+$(".edit_rating").removeClass("dim");
 <% if @rating.valid? %>
   $("#rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.rate.to_s) %>");
   $("#average_rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.beer.average_rating.round(1).to_s) %>");
