@@ -10,7 +10,8 @@
 <body>
 	<div id="debug"><%= render "layouts/debug" %></div>
 	<div class="hero-unit">
-	  <div style="float:right;">
+	  <div style="float:right; text-align: right; width: 20%;">
+		<div id="user_info">
 		<% if !current_user %>
 			<p><%= link_to "log in", new_user_session_path %></p>
 			<p>
@@ -22,13 +23,16 @@
 		  <p>logged in as <%= current_user.email.split('@').first %></p>
 		  <p><%= link_to "sign out", sign_out_path %>
 		<% end %>
+		</div>
+		<div id="flash_messages">
+	      <%= render 'layouts/alerts' %>
+		</div>
 	</div>
 	<h1><%= hero.first %></h1>
 	<p> <%= hero.last %></p>
 	</div>
 	
 	<div class="container">
-
   <%= yield %>
     </div>
 

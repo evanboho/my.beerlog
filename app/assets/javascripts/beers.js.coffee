@@ -1,4 +1,5 @@
 jQuery -> 
+  $('.alert').delay(2000).fadeOut(500);
   $("button.beeer-row").live("click", ->
     id = $(this).attr('id')
     $('tr#beer-row-' + id).toggle()

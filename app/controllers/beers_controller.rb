@@ -78,7 +78,11 @@ class BeersController < ApplicationController
   
   def update
     @beer = Beer.find(params[:id])
-    @beer.update_attributes(params[:beer])
+    if @beer.update_attributes(params[:beer])
+      flash[:notice] = "thanks! beer = updated!"
+    else
+      flash[:error] = "error! error! error!"
+    end
     respond_to do |format|
       format.html { redirect_to beers_path }
       format.js

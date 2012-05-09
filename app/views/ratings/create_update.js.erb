@@ -7,3 +7,4 @@
   // $("#user_info").before('<div class="alert" id="flash_notice"><%= escape_javascript(flash[:notice]) %></div>');
   $("#rating_flash_messages").html('<%= escape_javascript(render('layouts/alerts')) %>');
 <% end %>
+$('.alert').delay(2500).fadeOut(500);

@@ -66,6 +66,7 @@
 		  <div class="modal-header">
 		    <button class="close" data-dismiss="modal">×</button>
 		    <h2>Rate: <%= beer.brewery %> <%= beer.brew %></h2>
+		    <div id="rating_flash_messages"></div>
 		  </div>
 		  <div class="modal-body" style="text-align: center;">
 			<%= form_for @rating, :class => "beer" do |f| %>
@@ -75,8 +76,9 @@
 			<%= f.submit :class => "btn btn-primary" %>
 			<% end %>  
 			<br>
+			<div id="rating_flash_messagesss"></div>
 			<p style="font-size: 1.2em;">0.0 (worst) - 10.0 (best)
-		  </div>
+		  </div>		
 		</div>		  
 		<% end %>
 	  <td style="width: 80px;">
