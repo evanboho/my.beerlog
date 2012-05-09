@@ -1,10 +1,10 @@
+$(".modal").removeClass("dim");
 <% if @rating.valid? %>
   $("#rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.rate.to_s) %>");
   $("#average_rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.beer.average_rating.round(1).to_s) %>");
   $("#flash_messages").html('<%= escape_javascript(render('layouts/alerts')) %>');
   $('.modal').modal('hide');
 <% else %>
-  // $("#user_info").before('<div class="alert" id="flash_notice"><%= escape_javascript(flash[:notice]) %></div>');
   $("#rating_flash_messages").html('<%= escape_javascript(render('layouts/alerts')) %>');
 <% end %>
-$('.alert').delay(2500).fadeOut(500);
+$('.alert').delay(2000).fadeOut(1000);

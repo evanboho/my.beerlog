@@ -10,6 +10,5 @@ jQuery ->
     $('tr#new-beer-row').toggle()
     # $('.rating').toggle()
     $('.edit-button').toggleClass('hidden')
-    # $('#new-beer').toggle()
-    
+    # $('#new-beer').toggle() 
   )

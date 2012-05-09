@@ -28,6 +28,7 @@ $(document).ready(function() {
 	$('.edit_rating, .new_rating').live("submit", function() {
 		// id = $(".modal-rating").attr('id').split('-')[2];
 		// $('.modal').modal('hide');
+		$(".modal").addClass("dim");
 		$.post($(this).attr("action"), $(this).serialize(), null, "script");
 		return false;
 	});
