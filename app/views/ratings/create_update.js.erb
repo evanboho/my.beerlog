@@ -1,10 +1,12 @@
-$(".edit_rating").removeClass("dim");
+alert("#edit_rating_" + @rating.beer.id);
+$("#edit_rating_" + <%= @rating.beer.id %>).removeClass("dim");
 <% if @rating.valid? %>
   $("#rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.rate.to_s) %>");
   $("#average_rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.beer.average_rating.round(1).to_s) %>");
   $("#flash_messages").html('<%= escape_javascript(render('layouts/alerts')) %>');
   $('.modal').modal('hide');
 <% else %>
-  $("#rating_flash_messages").html('<%= escape_javascript(render('layouts/alerts')) %>');
+  // alert("#edit_rating_" + <%= @rating.beer.id %>);
+  // $("#rating_flash_messages_" + @rating.beer.id).html('<%= escape_javascript(render('layouts/alerts')) %>');
 <% end %>
 $('.alert').delay(2000).fadeOut(1000);

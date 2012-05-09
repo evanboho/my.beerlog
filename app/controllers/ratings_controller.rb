@@ -15,7 +15,7 @@ class RatingsController < ApplicationController
     end
     respond_to do |format|
       format.html {redirect_to beers_path}
-      format.js { render 'create_update' }
+      format.js { render 'create' }
     end
   end  
   
@@ -32,7 +32,7 @@ class RatingsController < ApplicationController
     end  
     respond_to do |format|
        format.html {redirect_to beers_path}
-       format.js { render 'create_update' }
+       format.js { render 'update' }
      end
   end
   

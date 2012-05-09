@@ -1,9 +1,15 @@
+$('.modal-body').removeClass("dim");
 <% if @rating.valid? %>
+  // $('#rating_modal_' + <%= @rating.beer.id %>).html('<%= escape_javascript(render('ratings/rating_modal', :beer => @rating.beer)) %>');
+  $('.modal').modal('hide');
+  $('.rating_field').removeClass("error");
   $("#rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.rate.to_s) %>");
   $("#average_rating_<%= @rating.beer.id %>").text("<%= escape_javascript(@rating.beer.average_rating.round(1).to_s) %>");
   $("#flash_messages").html('<%= escape_javascript(render('layouts/alerts')) %>');
-  $('.modal').modal('hide');
 <% else %>
-  // $("#user_info").before('<div class="alert" id="flash_notice"><%= escape_javascript(flash[:notice]) %></div>');
-  $("#rating_flash_messages").html('<%= escape_javascript(render('layouts/alerts')) %>');
+  $(".rating_field").addClass("control-group error");
+  $("#edit_rating_" + <%= @rating.id %>)[0].reset();
+  <% @rating.errors[:rate].present? ? flash.now[:error] = "rating must be between 0 - 10." : "your comment is wrong."  %>
+  $("#rating_flash_" + <%= @rating.beer.id %>).html('<%= escape_javascript(render('layouts/alerts')) %>');
 <% end %>
+$('.alert').delay(700).fadeOut(2000);

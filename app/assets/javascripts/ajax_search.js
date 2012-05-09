@@ -3,21 +3,28 @@ jQuery.ajaxSetup({
 })
 
 $(document).ready(function() {
+	// $("td.rating a").live("click", function() {
+	// 		alert((this).action);
+	// 	});
+	//$(".modal").on('show', function() {
+	  //var id = $(this).attr('id').split('-')[2];
+	  //alert(this.href);
+	//});
 	$("button.beer-row").live("click", function() {
       id = $(this).data('id');
       $('tr#beer-row-' + id).toggle();
       $('.edit-button').toggle();
     });
 	$('#beer_table th.sortable a, a.link-search, .nice_pagination a').live("click", function() {
-		$("#beer_table").addClass("dim");
-		$.getScript(this.href);
-		return false;
+	  $("#beer_table").addClass("dim");
+	  $.getScript(this.href);
+	  return false;
 	});
 	$('#beer_search').submit(function() {
-		$("#beer_table").addClass("dim");
-		$.get(this.action, $(this).serialize(), null, "script");
-		// alert(this.action);
-		return false;
+	  $("#beer_table").addClass("dim");
+	  $.get(this.action, $(this).serialize(), null, "script");
+	  // alert(this.action);
+	  return false;
 	});
 	// $('.modal-rating').click(function() {
 	// 	id = $(".modal-rating").attr('id').split('-')[2];
@@ -29,7 +36,9 @@ $(document).ready(function() {
 		// id = $(".modal-rating").attr('id').split('-')[2];
 		// $('.modal').modal('hide');
 		id = $(this).attr('id').split('_')[2];
-		$("#edit_rating_" + id).addClass("dim");
+		// $("#edit_rating_" + id).addClass("dim");
+		$('.modal-body').addClass("dim");
+		// $('.new_rating').addClass("dim");
 		$.post($(this).attr("action"), $(this).serialize(), null, "script");
 		return false;
 	});
