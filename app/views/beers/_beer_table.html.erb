@@ -40,8 +40,8 @@
 	<tr>
 	  <td>
 		<%= link_to beer.brewery, params.merge(:search => beer.brewery), :class => "link-search" %>
-	  <td>
-		<%= beer.brew %> <span style="float: right;"><%= "#{beer.year}" %></span>
+	  <td class="beer">
+		<%= link_to beer.brew, beer %> <span style="float: right;"><%= "#{beer.year}" %></span>
 	  <td>
 		<%= link_to beer.style, params.merge(:search => beer.style), :class => "link-search" %>
 	  <td>
@@ -66,7 +66,7 @@
      	<div id="rating_modal_<%= beer.id %>">
 	      <%= render 'ratings/rating_modal', :beer => beer %>
 	    </div>
-	  </div>
+	  </div>	
 		<% end %>
 	  <td style="width: 80px;">
 		<button data-id="<%= beer.id %>" data-toggle="collapse" data-target="#beer-form-<%= beer.id %>" class="beer-row btn edit-button">edit</button>
@@ -82,3 +82,11 @@
 		<td colspan=7>
 			<%= will_paginate @beers, :class => "nice_pagination" %>
 </table>
+
+<div class="modal hide fade in" id="beer_show_modal">
+  <div style="padding: 15px;">
+    <button class="close" data-dismiss="modal">×</button>
+  </div>
+  <div id="beer_show">
+  </div>
+</div>

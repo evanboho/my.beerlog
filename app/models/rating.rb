@@ -10,6 +10,12 @@ class Rating < ActiveRecord::Base
   validates :comment, :length => { :maximum => 200 }
   validate :user_beer_uniqueness, :on => :create
   
+  before_save :humanize_comment
+  
+  def humanize_comment
+    self.comment = self.comment.try(:humanize)
+  end
+  
   def user_beer_uniqueness
     if Rating.find_by_user_id_and_beer_id(self.user_id, self.beer_id).present?
       errors.add(:rate, "You can't rate a beer more than once.")

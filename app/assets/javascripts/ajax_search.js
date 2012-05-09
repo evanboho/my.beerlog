@@ -42,4 +42,10 @@ $(document).ready(function() {
 		$.post($(this).attr("action"), $(this).serialize(), null, "script");
 		return false;
 	});
+	
+	$('td.beer a').live("click", function() {
+	  $.getScript(this.href);
+	  return false;
+	})
+	
 });

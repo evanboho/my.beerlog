@@ -1,7 +1,7 @@
-@mixin rounded {
-  border-radius: 20px;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
+@mixin rounded($radius: 20px) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
 }
 
 @mixin shadow($color: #003366, $amount: 15%) {
@@ -14,6 +14,13 @@
   -webkit-box-shadow: inset -3px -8px 15px darken($color, $amount);
   -moz-box-shadow: inset -3px -8px 15px darken($color, $amount);
   box-shadow: inset -3px -8px 15px darken($color, $amount);
+}
+
+body {
+  font-size: 14px;
+  p, li {
+  font-size: 16px;
+}
 }
 
 .modal {
@@ -80,6 +87,18 @@ input.beer-submit {
   filter: alpha(opacity=50);
   opacity: 0.5;
 }
+.bubble {
+  @include rounded(10px);
+  font-size: 1.2em;
+  padding:15px;
+  @include inset-shadow(#fff, 15%);
+  background-color: #fff;
+}
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
 
 .nice_pagination{ 
   width: 50%;
@@ -116,4 +135,14 @@ input.beer-submit {
 textarea.comment_field {
   width: 300px;
   height: 70px;
+}
+.small-container {
+  width: 60%;
+}
+.modal-container {
+  width: 80%;
+}
+.modal {
+  @include inset-shadow;
+  border-color: black;
 }

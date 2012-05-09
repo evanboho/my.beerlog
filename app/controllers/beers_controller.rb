@@ -58,6 +58,14 @@ class BeersController < ApplicationController
     ids
   end
   
+  def show
+    @beer = Beer.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
   def new
     @beer = Beer.new
   end
