@@ -1,0 +1,22 @@
+<div style="clear: both; width: 400px;" class="container small-container">
+<% @rating = find_rating(current_user.id, beer.id) %>
+<% @rating ||= Rating.new %>
+<%= form_for @rating, :class => "beer" do |f| %>
+  <fieldset>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+    <%= f.hidden_field(:beer_id, :value => beer.id) %>
+    <span class="rating_field">
+	<b>rating:</b><br>
+      <%= f.text_field :rate, :class => "rate_field" %><br>
+    </span>
+ 	<span class="comment_field">
+	<b>comment: </b><br>
+	  <%= f.text_area :comment, :class => "comment_field" %>
+    </span>
+    <div style="clear:both; text-align: right;">
+    <%= f.submit :class => "btn btn-primary" %>
+    </div>
+  </fieldset>
+<% end %>  
+</div>
+</div>

@@ -14,13 +14,11 @@
 	<%= beer.average_rating.round(1) %>
   <% if current_user.present? %>
   <td class="rating">
-	  <% rating = Rating.find_by_user_id_and_beer_id(current_user.id, beer.id) %>
+	  <% @rating = find_rating(current_user.id, beer.id) %>
 	  <a data-toggle="modal" href="#rate-beer-<%= beer.id %>">
-	<% if rating.present? %>
-	  <% @rating = rating %>
+	<% if @rating.present? %>
 	  <%= @rating.rate.round(1) %>
     <% else %>	
-	  <% @rating = Rating.new %>
 	  rate
 	<% end %>
 	</a>

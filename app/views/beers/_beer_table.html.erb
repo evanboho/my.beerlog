@@ -51,23 +51,24 @@
 	  <td class="rating" id="average_rating_<%= beer.id %>">
 		<%= beer.average_rating != 0 ? beer.average_rating.round(1) : "n/a" %>
 	  <% if current_user.present? %>
+	  
+	
 	  <td class="rating">
-		  <% rating = Rating.find_by_user_id_and_beer_id(current_user.id, beer.id) %>
-		  <a data-toggle="modal" href="#rate-beer-<%= beer.id %>" id="rating_<%= beer.id %>">
-		<% if rating.present? %>
-		  <% @rating = rating %>
-		  <%= @rating.rate.round(1) %>
-	    <% else %>	
-		  <% @rating = Rating.new %>
-		  rate
-		<% end %>
+		
+	  <a data-toggle="modal" href="#rate-beer-<%= beer.id %>" id="rating_<%= beer.id %>">
+		<% @rating = find_rating(current_user.id, beer.id) %>
+		<%= @rating.rate.present? ? @rating.rate.round(1) : "rate" %>
 	  </a>
+	
+	
 	  <div class="modal hide fade modal-rating" id="rate-beer-<%= beer.id %>">
      	<div id="rating_modal_<%= beer.id %>">
 	      <%= render 'ratings/rating_modal', :beer => beer %>
 	    </div>
 	  </div>	
-		<% end %>
+	  <% end %>
+	
+	
 	  <td style="width: 80px;">
 		<button data-id="<%= beer.id %>" data-toggle="collapse" data-target="#beer-form-<%= beer.id %>" class="beer-row btn edit-button">edit</button>
 	  </tr>
@@ -83,10 +84,9 @@
 			<%= will_paginate @beers, :class => "nice_pagination" %>
 </table>
 
-<div class="modal hide fade in" id="beer_show_modal">
+<div class="modal beer-show-modal hide fade in" id="beer_show_modal">
   <div style="padding: 15px;">
     <button class="close" data-dismiss="modal">×</button>
   </div>
-  <div id="beer_show">
-  </div>
+  <div id="beer_show"></div>
 </div>

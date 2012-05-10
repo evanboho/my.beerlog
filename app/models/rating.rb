@@ -22,4 +22,8 @@ class Rating < ActiveRecord::Base
     end
   end
   
+  def self.user_rating(user)
+    find_by_user_id_and_beer_id(user, @beer.id)
+  end
+
 end

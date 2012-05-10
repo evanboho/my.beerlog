@@ -146,3 +146,15 @@ textarea.comment_field {
   @include inset-shadow;
   border-color: black;
 }
+
+.rating_field {
+  float: left;
+  text-align: left;
+}
+.comment_field {
+  float:right;
+  text-align: left;
+}
+.beer-show-modal {
+  height: 100%;
+}

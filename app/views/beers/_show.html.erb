@@ -1,40 +1,39 @@
 <div class="container small-container">
-<br>
-<h3><%= @beer.brewery %></h3>
-<h2><%= @beer.brew %></h2>
-<%= "ABV: #{@beer.abv_int} %" if @beer.abv_int.present? %><br>
-<%= "IBU: #{@beer.ibu_int}" if @beer.ibu_int.present? %><br><br>
-</div>
-<div class="container modal-container">
-<p style="float:left;">Average rating: <%= @beer.average_rating %><br>
-( <%= pluralize(@beer.rating_count, "rating") %> )</p>
-<% if current_user.present? && rating = Rating.find_by_user_id_and_beer_id(current_user.id, @beer.id)%>
-  <p style="float:right;"><b>Your rating: <%= rating.rate %></b></p>
-<% end %>
-  <% if @beer.ratings.count > 0 %>
-  <div style="clear: both;" class="well">
-  
-  <h3>Comments:</h3><br>
-    <ul>
-    <% @beer.ratings.each do |rating| %>
-	<% @count = 0 %>
-      <% if rating.comment.present? %>
-        <li class="bubble">
-	    <span style="text-align: right;">
-	    <%= username(rating.user) %>: 
-	    <span style="font-size: 1.5em;"><b><%= rating.rate %> </b></span></span><br>
-	    <div class=""><%= rating.comment %></div>
-	
-		<% @count += 1 %>
-	  <% end %>
-	</li>
-    
-	<% end %>
-	<% if @count == 0 %>
-	  <h3>no comments</h3>
-	<% end %>
-	</div>
-	
+  <div style="float:left;">
+  <h3><%= @beer.brewery %></h3>
+  <h1><%= @beer.brew %></h1>
+  <%= "ABV: #{@beer.abv_int} %" if @beer.abv_int.present? %><br>
+  <%= "IBU: #{@beer.ibu_int}" if @beer.ibu_int.present? %>
+  </div>
+  <div style="float: right;">
+  <p style="text-align:right;">Average rating: <%= @beer.average_rating %><br>
+  ( <%= pluralize(@beer.rating_count, "rating") %> )</p>
+  <% if current_user.present? && rating = Rating.find_by_user_id_and_beer_id(current_user.id, @beer.id)%>
+    <p style="text-align:right;"><b>Your rating: <%= rating.rate %></b></p>
   <% end %>
   </div>
+</div>
+
+<div style="clear:both;"><br>
+  <%= render 'ratings/rating_form', :beer => @beer if current_user.present? %>
+  
+  <% if @beer.ratings.count > 0 %>
+    <div style="width: 90%;clear: both;" class="well">
+      <h3>Comments:</h3><br>
+      <ul>
+      <% @beer.ratings.each do |rating| %>
+	    <% @count = 0 %>
+        <% if rating.comment.present? %>
+          <li class="bubble">
+	        <span style="text-align: right;">
+	        <%= username(rating.user) %>: 
+	        <span style="font-size: 1.2em;"><b><%= rating.rate %> </b></span></span><br>
+	        <div class=""><%= rating.comment %></div>
+		    <% @count += 1 %>
+	      </li>
+	    <% end %>
+	  <% end %>
+	  <h3><%= "no comments" if @count == 0 %></h3>
+	</div>
+  <% end %>
 </div>

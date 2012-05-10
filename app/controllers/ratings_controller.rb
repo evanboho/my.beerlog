@@ -2,7 +2,10 @@ class RatingsController < ApplicationController
   
   def create
     beer = Beer.find(params[:rating][:beer_id])
-    @rating = beer.ratings.new(:rate => (params[:rating][:rate]).to_f.round(1), :user_id => current_user.id, :tasted_on => Date.today)
+    @rating = beer.ratings.new( :rate => (params[:rating][:rate]).to_f.round(1), 
+                                :user_id => current_user.id, 
+                                :tasted_on => Date.today,
+                                :comment => params[:rating][:comment])
     if @rating.save
       rating = beer.average_rating * beer.rating_count
       rating += @rating.rate
